@@ -117,9 +117,10 @@
     
     .logo-text {
       font-size: 24px;
-      font-weight: 900;
+      font-weight: 800;
       color: white;
       letter-spacing: -0.5px;
+      text-transform: uppercase;
     }
     
     .logo-badge {
@@ -506,68 +507,110 @@
     .endpoint-display {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 16px;
-      background: var(--cream-white);
-      border-radius: 16px;
-      margin-bottom: 16px;
+      gap: 16px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, var(--white) 0%, var(--cream-white) 100%);
+      border-radius: 20px;
+      margin-top: 16px;
+      border: 1px solid rgba(142, 126, 125, 0.1);
+      box-shadow: 0 4px 24px rgba(72, 53, 52, 0.06), 0 1px 3px rgba(72, 53, 52, 0.04);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .endpoint-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--hero-start) 0%, var(--yellow-dark) 50%, var(--hero-end) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .endpoint-display:hover {
+      box-shadow: 0 8px 32px rgba(72, 53, 52, 0.1), 0 2px 8px rgba(72, 53, 52, 0.06);
+      transform: translateY(-2px);
+    }
+    
+    .endpoint-display:hover::before {
+      opacity: 1;
     }
     
     .endpoint-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--white);
-      border-radius: 12px;
       display: grid;
       place-items: center;
+      flex-shrink: 0;
     }
     
     .endpoint-icon i {
-      width: 20px;
-      height: 20px;
-      color: var(--hero-start);
+      width: 24px;
+      height: 24px;
+      color: var(--clay);
+      stroke-width: 2;
     }
     
     .endpoint-info {
       flex: 1;
+      min-width: 0;
     }
     
     .endpoint-label {
-      font-size: 9px;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       text-transform: uppercase;
       color: var(--clay);
-      margin-bottom: 2px;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
     }
     
     .endpoint-url {
       font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-      font-size: var(--body-comfortable);
+      font-size: 15px;
       font-weight: 600;
       color: var(--espresso);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     
     .endpoint-copy {
-      background: var(--white);
+      background: linear-gradient(135deg, var(--espresso) 0%, #5a4544 100%);
       border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       cursor: pointer;
       display: grid;
       place-items: center;
-      color: var(--clay);
-      transition: all 0.2s;
+      color: var(--white);
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(72, 53, 52, 0.2);
     }
     
     .endpoint-copy:hover {
-      color: var(--espresso);
-      background: var(--cream);
+      transform: scale(1.08);
+      box-shadow: 0 4px 16px rgba(72, 53, 52, 0.3);
+      background: linear-gradient(135deg, var(--cherry-dark) 0%, var(--hero-end) 100%);
+    }
+    
+    .endpoint-copy:active {
+      transform: scale(0.95);
     }
     
     .endpoint-copy i {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+    
+    .endpoint-copy.copied {
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
     }
     
     /* Tool List */
@@ -652,9 +695,10 @@
     }
     
     .footer-logo-text {
-      font-weight: 900;
+      font-weight: 800;
       font-size: 24px;
       color: var(--cherry-bright);
+      text-transform: uppercase;
     }
     
     .footer-copyright {
@@ -699,8 +743,10 @@
     }
     
     .footer-link i {
-      width: 16px;
-      height: 16px;
+      width: 10px;
+      height: 10px;
+      opacity: 0.4;
+      stroke-width: 2.5;
     }
     
     /* Responsive */
@@ -875,7 +921,7 @@
             <div class="divider"></div>
             <a href="#" class="action-link">
               <i data-lucide="message-circle"></i>
-              "What's our brand voice?"
+              "Design this like SODAX."
             </a>
             <a href="#" class="action-link">
               <i data-lucide="message-circle"></i>
@@ -952,9 +998,11 @@
     function copyEndpoint() {
       navigator.clipboard.writeText(endpointUrl).then(() => {
         const btn = document.querySelector('.endpoint-copy');
+        btn.classList.add('copied');
         btn.innerHTML = '<i data-lucide="check"></i>';
         lucide.createIcons();
         setTimeout(() => {
+          btn.classList.remove('copied');
           btn.innerHTML = '<i data-lucide="copy"></i>';
           lucide.createIcons();
         }, 2000);
