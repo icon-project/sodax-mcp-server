@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SODAX MCP Server</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Shrikhand&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* SODAX Design Tokens from Figma */
+    :root {
+      /* Colors */
+      --almost-white: #f8f3f3;
+      --cream-white: #ede6e6;
+      --cream: #eaded4;
+      --espresso: #483534;
+      --clay: #8e7e7d;
+      --clay-dark: #6b5c5b;
+      --cherry-bright: #cc9e9a;
+      --cherry-dark: #9c4846;
+      --yellow-dark: #ecc100;
+      --white: #ffffff;
+      --black: #000000;
+      
+      /* Hero gradient */
+      --hero-start: #bb7b70;
+      --hero-mid: #cc9c8a;
+      --hero-end: #b16967;
+      
+      /* Typography */
+      --font-body: 'Inter', sans-serif;
+      --font-playful: 'Shrikhand', cursive;
+      
+      /* Sizes */
+      --body-small: 12px;
+      --body-comfortable: 14px;
+      --body-fine-print: 11px;
+      --body-super-comfortable: 16px;
+      --subtitle: 18px;
+      
+      /* Radius */
+      --radius-card: 24px;
+      --radius-pill: 240px;
+      --radius-button: 16px;
+      
+      /* Shadows */
+      --shadow-card: 0px 4px 32px var(--cream-white);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--espresso);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Header / Hero */
+    .header {
+      height: 100px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .header-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #BB7B70 0%, #CC9C8A 50%, #B16967 100%);
+    }
+    
+    .header-content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      z-index: 20;
+      padding: 0 32px;
+      max-width: 1264px;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    
+    .logo:hover {
+      opacity: 0.8;
+    }
+    
+    .logo-symbol {
+      height: 32px;
+      width: 32px;
+    }
+    
+    .logo-text {
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    
+    .logo-badge {
+      mix-blend-mode: screen;
+      color: #f3d2ca;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-left: 8px;
+    }
+    
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+    }
+    
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: var(--yellow-dark);
+      color: var(--cherry-dark);
+      padding: 0 24px;
+      height: 40px;
+      border-radius: 24px;
+      text-decoration: none;
+      font-family: var(--font-playful);
+      font-size: 14px;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(236, 193, 0, 0.3);
+    }
+    
+    .cta-button i {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Main Section */
+    .main {
+      background: var(--almost-white);
+      padding: 48px 24px;
+      min-height: calc(100vh - 100px);
+    }
+    
+    .container {
+      max-width: 944px;
+      margin: 0 auto;
+    }
+    
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 304px;
+      gap: 16px;
+    }
+    
+    /* Main Content */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    /* Featured Card */
+    .featured-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 8px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+    }
+    
+    .featured-thumbnail {
+      width: 288px;
+      min-height: 180px;
+      height: 100%;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-mid) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .featured-thumbnail::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.15) 0%, transparent 50%);
+    }
+    
+    .featured-thumbnail-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--yellow-dark);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-thumbnail-icon i {
+      width: 22px;
+      height: 22px;
+      color: var(--espresso);
+    }
+    
+    .featured-thumbnail-title {
+      font-size: 28px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-thumbnail-subtitle {
+      font-family: var(--font-playful);
+      font-style: italic;
+      font-size: 16px;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-content {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+    
+    .card-label {
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--clay);
+      letter-spacing: 0.02em;
+    }
+    
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--espresso);
+      line-height: 1.1;
+    }
+    
+    .card-desc {
+      font-size: var(--body-comfortable);
+      color: var(--clay-dark);
+      line-height: 1.4;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream-white);
+      padding: 0 8px;
+      height: 20px;
+      border-radius: 256px;
+      font-size: var(--body-fine-print);
+      color: var(--clay);
+      width: fit-content;
+      margin-top: auto;
+    }
+    
+    /* Tool Cards Grid */
+    .tools-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    .tool-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 8px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .tool-thumbnail {
+      height: 120px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--hero-start) 0%, var(--cherry-bright) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tool-thumbnail::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
+    
+    .tool-icon-grid {
+      display: flex;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .tool-mini-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+    }
+    
+    .tool-mini-icon i {
+      width: 16px;
+      height: 16px;
+      color: white;
+    }
+    
+    .tool-content {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .tool-title {
+      font-size: var(--subtitle);
+      font-weight: 700;
+      color: var(--espresso);
+      line-height: 1.2;
+    }
+    
+    .tool-desc {
+      font-size: var(--body-comfortable);
+      color: var(--clay-dark);
+      line-height: 1.4;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .side-module {
+      background: var(--cream-white);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .side-module-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .side-module-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--espresso);
+      line-height: 1.4;
+    }
+    
+    .side-module-desc {
+      font-size: var(--body-comfortable);
+      color: var(--clay);
+      line-height: 1.4;
+    }
+    
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, var(--clay) 0%, transparent 100%);
+      opacity: 0.3;
+    }
+    
+    .action-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--clay);
+      text-decoration: none;
+      font-size: var(--body-small);
+      transition: color 0.2s;
+    }
+    
+    .action-link:hover {
+      color: var(--espresso);
+    }
+    
+    .action-link i {
+      width: 21px;
+      height: 21px;
+    }
+    
+    /* Code Config Card */
+    .config-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 8px;
+      box-shadow: var(--shadow-card);
+    }
+    
+    .config-inner {
+      background: var(--espresso);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+    }
+    
+    .config-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    
+    .config-title {
+      color: var(--cream);
+      font-size: var(--body-small);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: var(--cream);
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    
+    .copy-btn i {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .config-code {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--cream);
+    }
+    
+    .config-code .key { color: var(--cherry-bright); }
+    .config-code .string { color: var(--yellow-dark); }
+    .config-code .bracket { color: var(--clay); }
+    
+    /* Endpoint Display */
+    .endpoint-display {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--cream-white);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .endpoint-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--white);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+    }
+    
+    .endpoint-icon i {
+      width: 20px;
+      height: 20px;
+      color: var(--hero-start);
+    }
+    
+    .endpoint-info {
+      flex: 1;
+    }
+    
+    .endpoint-label {
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 2px;
+    }
+    
+    .endpoint-url {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: var(--body-comfortable);
+      font-weight: 600;
+      color: var(--espresso);
+    }
+    
+    .endpoint-copy {
+      background: var(--white);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: var(--clay);
+      transition: all 0.2s;
+    }
+    
+    .endpoint-copy:hover {
+      color: var(--espresso);
+      background: var(--cream);
+    }
+    
+    .endpoint-copy i {
+      width: 18px;
+      height: 18px;
+    }
+    
+    /* Tool List */
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .tool-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .tool-list-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    
+    .tool-list-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--cream-white);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    
+    .tool-list-icon i {
+      width: 18px;
+      height: 18px;
+      color: var(--hero-start);
+    }
+    
+    .tool-list-name {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--espresso);
+    }
+    
+    .tool-list-desc {
+      font-size: 12px;
+      color: var(--clay);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--almost-white);
+      min-height: 400px;
+      padding: 80px 32px 48px;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    
+    .footer-brand {
+      min-width: 200px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-symbol {
+      height: 28px;
+      width: auto;
+    }
+    
+    .footer-logo-text {
+      font-weight: 900;
+      font-size: 24px;
+      color: var(--cherry-bright);
+    }
+    
+    .footer-copyright {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cherry-bright);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-left: auto;
+    }
+    
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 134px;
+    }
+    
+    .footer-column-title {
+      font-family: var(--font-playful);
+      font-size: 16px;
+      color: var(--cherry-bright);
+      line-height: 1;
+    }
+    
+    .footer-link {
+      font-size: var(--body-small);
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+    
+    .footer-link:hover {
+      opacity: 0.7;
+    }
+    
+    .footer-link i {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .featured-card {
+        flex-direction: column;
+      }
+      
+      .featured-thumbnail {
+        width: 100%;
+        height: 160px;
+      }
+      
+      .tools-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-content {
+        padding: 0 16px;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 32px;
+      }
+      
+      .footer-links {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-bg"></div>
+    <div class="header-content">
+      <div class="header-left">
+        <a href="https://sodax.com" class="logo" target="_blank">
+          <img src="/images/symbol.png" alt="SODAX" class="logo-symbol">
+          <span class="logo-text">SODAX</span>
+          <span class="logo-badge">MCP</span>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="https://sodax.com" class="cta-button" target="_blank">
+          <i data-lucide="arrow-left"></i>
+          back to sodax
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Main Content -->
+        <div class="main-content">
+          <!-- Featured Card - Endpoint -->
+          <div class="featured-card">
+            <div class="featured-thumbnail">
+              <div class="featured-thumbnail-icon">
+                <i data-lucide="plug-zap"></i>
+              </div>
+              <div class="featured-thumbnail-title">MCP</div>
+              <div class="featured-thumbnail-subtitle">endpoint</div>
+            </div>
+            <div class="featured-content">
+              <span class="card-label">Connect Your AI</span>
+              <h1 class="card-title">Model Context Protocol Server</h1>
+              <p class="card-desc">Give your AI assistant direct access to SODAX brand guidelines and live trading data through the standardized MCP protocol.</p>
+              <div class="endpoint-display">
+                <div class="endpoint-icon">
+                  <i data-lucide="link"></i>
+                </div>
+                <div class="endpoint-info">
+                  <div class="endpoint-label">MCP Endpoint</div>
+                  <div class="endpoint-url" id="endpoint-url">Loading...</div>
+                </div>
+                <button class="endpoint-copy" onclick="copyEndpoint()" title="Copy">
+                  <i data-lucide="copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Config Card -->
+          <div class="config-card">
+            <div class="config-inner">
+              <div class="config-header">
+                <span class="config-title">Claude Desktop Config</span>
+                <button class="copy-btn" onclick="copyConfig()">
+                  <i data-lucide="copy"></i>
+                  Copy
+                </button>
+              </div>
+              <pre class="config-code" id="config-json"><span class="bracket">{</span>
+  <span class="key">"mcpServers"</span>: <span class="bracket">{</span>
+    <span class="key">"sodax"</span>: <span class="bracket">{</span>
+      <span class="key">"url"</span>: <span class="string">"http://localhost:3000/mcp"</span>
+    <span class="bracket">}</span>
+  <span class="bracket">}</span>
+<span class="bracket">}</span></pre>
+            </div>
+          </div>
+
+          <!-- Tool Cards -->
+          <div class="tools-row">
+            <div class="tool-card">
+              <div class="tool-thumbnail">
+                <div class="tool-icon-grid">
+                  <div class="tool-mini-icon"><i data-lucide="palette"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="type"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="image"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="message-square"></i></div>
+                </div>
+              </div>
+              <div class="tool-content">
+                <span class="card-label">Brand Bible</span>
+                <h2 class="tool-title">6 Brand Tools</h2>
+                <p class="tool-desc">Access brand guidelines, voice & tone, visual identity, and messaging.</p>
+                <span class="badge">Auto-refreshes every 5 min</span>
+              </div>
+            </div>
+            <div class="tool-card">
+              <div class="tool-thumbnail">
+                <div class="tool-icon-grid">
+                  <div class="tool-mini-icon"><i data-lucide="activity"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="coins"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="bar-chart-3"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="users"></i></div>
+                </div>
+              </div>
+              <div class="tool-content">
+                <span class="card-label">Live API</span>
+                <h2 class="tool-title">10 API Tools</h2>
+                <p class="tool-desc">Query chains, tokens, transactions, volume, partners, and token supply in real-time.</p>
+                <span class="badge">Live from api.sodax.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="side-module">
+            <div class="side-module-header">
+              <span class="card-label">Resources</span>
+              <h3 class="side-module-title">SDK Documentation</h3>
+              <p class="side-module-desc">Comprehensive guides, API references, and tutorials to integrate SODAX.</p>
+            </div>
+            <div class="divider"></div>
+            <a href="https://docs.sodax.com/~gitbook/mcp" class="action-link" target="_blank">
+              <i data-lucide="book-open"></i>
+              View documentation
+            </a>
+          </div>
+
+          <div class="side-module">
+            <div class="side-module-header">
+              <span class="card-label">Example Questions</span>
+              <h3 class="side-module-title">Try asking your AI</h3>
+              <p class="side-module-desc">Once connected, ask questions like these to test the integration.</p>
+            </div>
+            <div class="divider"></div>
+            <a href="#" class="action-link">
+              <i data-lucide="message-circle"></i>
+              "What's our brand voice?"
+            </a>
+            <a href="#" class="action-link">
+              <i data-lucide="message-circle"></i>
+              "What chains does SODAX support?"
+            </a>
+            <a href="#" class="action-link">
+              <i data-lucide="message-circle"></i>
+              "Show me trading volume"
+            </a>
+            <a href="#" class="action-link">
+              <i data-lucide="message-circle"></i>
+              "Review this for brand alignment"
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/images/symbol.png" alt="SODAX" class="footer-logo-symbol">
+          <span class="footer-logo-text">SODAX</span>
+        </div>
+        <p class="footer-copyright">© 2025 ICON Foundation. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <span class="footer-column-title">using soda</span>
+          <a href="https://sodax.com/swap" class="footer-link">SODAX Swap</a>
+          <a href="https://www.hanawallet.io/" class="footer-link" target="_blank">Hana Wallet <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://app.balanced.network/" class="footer-link" target="_blank">Balanced DeFi <i data-lucide="arrow-up-right"></i></a>
+        </div>
+        <div class="footer-column">
+          <span class="footer-column-title">socials</span>
+          <a href="https://sodax.com/news" class="footer-link">News</a>
+          <a href="https://discord.gg/xM2Nh4S6vN" class="footer-link" target="_blank">Discord <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://x.com/gosodax" class="footer-link" target="_blank">X (Twitter) <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://linktr.ee/go.sodax" class="footer-link" target="_blank">Linktree <i data-lucide="arrow-up-right"></i></a>
+        </div>
+        <div class="footer-column">
+          <span class="footer-column-title">resources</span>
+          <a href="https://sodax-1.gitbook.io/sodax-docs/readme-1" class="footer-link" target="_blank">Documentation <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://github.com/icon-project/sodax-frontend" class="footer-link" target="_blank">Github <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://sodaxscan.com/" class="footer-link" target="_blank">SODAX Scan <i data-lucide="arrow-up-right"></i></a>
+          <a href="#" class="footer-link">Brand Kit <i data-lucide="arrow-down"></i></a>
+          <a href="#" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    
+    const host = window.location.origin;
+    const endpointUrl = `${host}/mcp`;
+    
+    document.getElementById('endpoint-url').textContent = endpointUrl;
+    
+    // Update config with actual URL
+    const configEl = document.getElementById('config-json');
+    configEl.innerHTML = `<span class="bracket">{</span>
+  <span class="key">"mcpServers"</span>: <span class="bracket">{</span>
+    <span class="key">"sodax"</span>: <span class="bracket">{</span>
+      <span class="key">"url"</span>: <span class="string">"${endpointUrl}"</span>
+    <span class="bracket">}</span>
+  <span class="bracket">}</span>
+<span class="bracket">}</span>`;
+    
+    function copyEndpoint() {
+      navigator.clipboard.writeText(endpointUrl).then(() => {
+        const btn = document.querySelector('.endpoint-copy');
+        btn.innerHTML = '<i data-lucide="check"></i>';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = '<i data-lucide="copy"></i>';
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+    
+    function copyConfig() {
+      const config = JSON.stringify({
+        mcpServers: {
+          sodax: {
+            url: endpointUrl
+          }
+        }
+      }, null, 2);
+      
+      navigator.clipboard.writeText(config).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerHTML = '<i data-lucide="check"></i> Copied!';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = '<i data-lucide="copy"></i> Copy';
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
