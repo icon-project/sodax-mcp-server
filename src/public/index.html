@@ -3,7 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SODAX MCP Server</title>
+  
+  <!-- Primary Meta Tags -->
+  <title>SODAX MCP Server - Connect AI Assistants to DeFi Trading Data & Brand Guidelines</title>
+  <meta name="title" content="SODAX MCP Server - Connect AI Assistants to DeFi Trading Data & Brand Guidelines">
+  <meta name="description" content="Give your AI assistant direct access to SODAX brand guidelines and live cross-chain DeFi trading data through the Model Context Protocol (MCP). Query chains, tokens, transactions, and volume in real-time.">
+  <meta name="keywords" content="SODAX, MCP Server, Model Context Protocol, DeFi, AI assistant, trading data, brand guidelines, cross-chain, decentralized exchange">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ICON Foundation">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://mcp.sodax.com/">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/symbol.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/symbol.png">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mcp.sodax.com/">
+  <meta property="og:title" content="SODAX MCP Server - Connect AI Assistants to DeFi Trading Data">
+  <meta property="og:description" content="Give your AI assistant direct access to SODAX brand guidelines and live cross-chain DeFi trading data through the Model Context Protocol.">
+  <meta property="og:image" content="https://mcp.sodax.com/images/og-image.png">
+  <meta property="og:site_name" content="SODAX MCP Server">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://mcp.sodax.com/">
+  <meta property="twitter:title" content="SODAX MCP Server - Connect AI Assistants to DeFi Trading Data">
+  <meta property="twitter:description" content="Give your AI assistant direct access to SODAX brand guidelines and live cross-chain DeFi trading data through the Model Context Protocol.">
+  <meta property="twitter:image" content="https://mcp.sodax.com/images/og-image.png">
+  <meta property="twitter:site" content="@gosodax">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SODAX MCP Server",
+    "description": "Model Context Protocol server providing AI assistants with access to SODAX brand guidelines and live DeFi trading data.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "ICON Foundation",
+      "url": "https://icon.foundation"
+    },
+    "url": "https://mcp.sodax.com",
+    "featureList": [
+      "Brand guidelines access",
+      "Live trading data API",
+      "Cross-chain token information",
+      "Real-time volume statistics"
+    ]
+  }
+  </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Shrikhand&display=swap" rel="stylesheet">
@@ -61,6 +121,36 @@
       color: var(--espresso);
       line-height: 1.4;
       -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Accessibility - Visually hidden but accessible to screen readers */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    /* Skip to main content link for keyboard navigation */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--espresso);
+      color: var(--white);
+      padding: 8px 16px;
+      z-index: 100;
+      text-decoration: none;
+      border-radius: 0 0 8px 0;
+    }
+    
+    .skip-link:focus {
+      top: 0;
     }
     
     /* Header / Hero */
@@ -785,20 +875,23 @@
   </style>
 </head>
 <body>
+  <!-- Skip to main content for keyboard accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <!-- Header -->
-  <header class="header">
+  <header class="header" role="banner">
     <div class="header-bg"></div>
     <div class="header-content">
       <div class="header-left">
-        <a href="https://sodax.com" class="logo" target="_blank">
-          <img src="/images/symbol.png" alt="SODAX" class="logo-symbol">
+        <a href="https://sodax.com" class="logo" target="_blank" rel="noopener noreferrer" aria-label="Go to SODAX main website">
+          <img src="/images/symbol.png" alt="SODAX - Cross-chain DeFi Exchange" class="logo-symbol" width="32" height="32">
           <span class="logo-text">SODAX</span>
           <span class="logo-badge">MCP</span>
         </a>
       </div>
       <div class="header-right">
-        <a href="https://sodax.com" class="cta-button" target="_blank">
-          <i data-lucide="arrow-left"></i>
+        <a href="https://sodax.com" class="cta-button" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
           back to sodax
         </a>
       </div>
@@ -806,39 +899,39 @@
   </header>
 
   <!-- Main Content -->
-  <main class="main">
+  <main class="main" id="main-content" role="main">
     <div class="container">
       <!-- Content Grid -->
       <div class="content-grid">
         <!-- Main Content -->
         <div class="main-content">
           <!-- Featured Card - Endpoint -->
-          <div class="featured-card">
-            <div class="featured-thumbnail">
+          <section class="featured-card" aria-labelledby="main-heading">
+            <div class="featured-thumbnail" role="img" aria-label="MCP endpoint illustration">
               <div class="featured-thumbnail-icon">
-                <i data-lucide="plug-zap"></i>
+                <i data-lucide="plug-zap" aria-hidden="true"></i>
               </div>
               <div class="featured-thumbnail-title">MCP</div>
               <div class="featured-thumbnail-subtitle">endpoint</div>
             </div>
             <div class="featured-content">
               <span class="card-label">Connect Your AI</span>
-              <h1 class="card-title">Model Context Protocol Server</h1>
-              <p class="card-desc">Give your AI assistant direct access to SODAX brand guidelines and live trading data through the standardized MCP protocol.</p>
+              <h1 id="main-heading" class="card-title">Model Context Protocol Server</h1>
+              <p class="card-desc">Give your AI assistant direct access to SODAX brand guidelines and live cross-chain DeFi trading data through the standardized MCP protocol.</p>
               <div class="endpoint-display">
                 <div class="endpoint-icon">
-                  <i data-lucide="link"></i>
+                  <i data-lucide="link" aria-hidden="true"></i>
                 </div>
                 <div class="endpoint-info">
-                  <div class="endpoint-label">MCP Endpoint</div>
-                  <div class="endpoint-url" id="endpoint-url">Loading...</div>
+                  <label class="endpoint-label" for="endpoint-url">MCP Endpoint</label>
+                  <output class="endpoint-url" id="endpoint-url">Loading...</output>
                 </div>
-                <button class="endpoint-copy" onclick="copyEndpoint()" title="Copy">
-                  <i data-lucide="copy"></i>
+                <button class="endpoint-copy" onclick="copyEndpoint()" title="Copy endpoint URL to clipboard" aria-label="Copy endpoint URL to clipboard">
+                  <i data-lucide="copy" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Config Card -->
           <div class="config-card">
@@ -861,119 +954,120 @@
           </div>
 
           <!-- Tool Cards -->
-          <div class="tools-row">
-            <div class="tool-card">
-              <div class="tool-thumbnail">
+          <section class="tools-row" aria-label="Available MCP Tools">
+            <article class="tool-card">
+              <div class="tool-thumbnail" role="img" aria-label="Brand tools illustration">
                 <div class="tool-icon-grid">
-                  <div class="tool-mini-icon"><i data-lucide="palette"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="type"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="image"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="message-square"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="palette" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="type" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="image" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="message-square" aria-hidden="true"></i></div>
                 </div>
               </div>
               <div class="tool-content">
                 <span class="card-label">Brand Bible</span>
-                <h2 class="tool-title">6 Brand Tools</h2>
-                <p class="tool-desc">Access brand guidelines, voice & tone, visual identity, and messaging.</p>
+                <h2 class="tool-title">6 Brand Guidelines Tools</h2>
+                <p class="tool-desc">Access SODAX brand guidelines, voice & tone, visual identity, colors, typography, and messaging for AI-powered design consistency.</p>
                 <span class="badge">Auto-refreshes every 5 min</span>
               </div>
-            </div>
-            <div class="tool-card">
-              <div class="tool-thumbnail">
+            </article>
+            <article class="tool-card">
+              <div class="tool-thumbnail" role="img" aria-label="API tools illustration">
                 <div class="tool-icon-grid">
-                  <div class="tool-mini-icon"><i data-lucide="activity"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="coins"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="bar-chart-3"></i></div>
-                  <div class="tool-mini-icon"><i data-lucide="users"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="activity" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="coins" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="bar-chart-3" aria-hidden="true"></i></div>
+                  <div class="tool-mini-icon"><i data-lucide="users" aria-hidden="true"></i></div>
                 </div>
               </div>
               <div class="tool-content">
-                <span class="card-label">Live API</span>
-                <h2 class="tool-title">10 API Tools</h2>
-                <p class="tool-desc">Query chains, tokens, transactions, volume, partners, and token supply in real-time.</p>
+                <span class="card-label">Live DeFi API</span>
+                <h2 class="tool-title">10 Trading Data API Tools</h2>
+                <p class="tool-desc">Query cross-chain data, tokens, transactions, trading volume, partners, and token supply from SODAX DEX in real-time.</p>
                 <span class="badge">Live from api.sodax.com</span>
               </div>
-            </div>
-          </div>
+            </article>
+          </section>
         </div>
 
         <!-- Sidebar -->
-        <aside class="sidebar">
-          <div class="side-module">
+        <aside class="sidebar" aria-label="Additional resources">
+          <section class="side-module">
             <div class="side-module-header">
               <span class="card-label">Resources</span>
               <h3 class="side-module-title">SDK Documentation</h3>
-              <p class="side-module-desc">Comprehensive guides, API references, and tutorials to integrate SODAX.</p>
+              <p class="side-module-desc">Comprehensive guides, API references, and tutorials to integrate SODAX MCP server.</p>
             </div>
-            <div class="divider"></div>
-            <a href="https://docs.sodax.com/~gitbook/mcp" class="action-link" target="_blank">
-              <i data-lucide="book-open"></i>
+            <div class="divider" role="separator"></div>
+            <a href="https://docs.sodax.com/~gitbook/mcp" class="action-link" target="_blank" rel="noopener noreferrer">
+              <i data-lucide="book-open" aria-hidden="true"></i>
               View documentation
+              <span class="visually-hidden">(opens in new tab)</span>
             </a>
-          </div>
+          </section>
 
-          <div class="side-module">
+          <section class="side-module">
             <div class="side-module-header">
               <span class="card-label">Example Questions</span>
               <h3 class="side-module-title">Try asking your AI</h3>
-              <p class="side-module-desc">Once connected, ask questions like these to test the integration.</p>
+              <p class="side-module-desc">Once connected, ask questions like these to test the MCP integration.</p>
             </div>
-            <div class="divider"></div>
+            <div class="divider" role="separator"></div>
             <a href="#" class="action-link">
-              <i data-lucide="message-circle"></i>
+              <i data-lucide="message-circle" aria-hidden="true"></i>
               "Design this like SODAX."
             </a>
             <a href="#" class="action-link">
-              <i data-lucide="message-circle"></i>
+              <i data-lucide="message-circle" aria-hidden="true"></i>
               "What chains does SODAX support?"
             </a>
             <a href="#" class="action-link">
-              <i data-lucide="message-circle"></i>
+              <i data-lucide="message-circle" aria-hidden="true"></i>
               "Show me trading volume"
             </a>
             <a href="#" class="action-link">
-              <i data-lucide="message-circle"></i>
+              <i data-lucide="message-circle" aria-hidden="true"></i>
               "Review this for brand alignment"
             </a>
-          </div>
+          </section>
         </aside>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="footer-content">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="/images/symbol.png" alt="SODAX" class="footer-logo-symbol">
+          <img src="/images/symbol.png" alt="SODAX logo" class="footer-logo-symbol" width="28" height="28">
           <span class="footer-logo-text">SODAX</span>
         </div>
-        <p class="footer-copyright">© 2025 ICON Foundation. All rights reserved.</p>
+        <p class="footer-copyright">© 2026 ICON Foundation. All rights reserved.</p>
       </div>
-      <div class="footer-links">
+      <nav class="footer-links" aria-label="Footer navigation">
         <div class="footer-column">
-          <span class="footer-column-title">using soda</span>
+          <span class="footer-column-title" id="footer-using">using soda</span>
           <a href="https://sodax.com/swap" class="footer-link">SODAX Swap</a>
-          <a href="https://www.hanawallet.io/" class="footer-link" target="_blank">Hana Wallet <i data-lucide="arrow-up-right"></i></a>
-          <a href="https://app.balanced.network/" class="footer-link" target="_blank">Balanced DeFi <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://www.hanawallet.io/" class="footer-link" target="_blank" rel="noopener noreferrer">Hana Wallet <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="https://app.balanced.network/" class="footer-link" target="_blank" rel="noopener noreferrer">Balanced DeFi <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
         </div>
         <div class="footer-column">
-          <span class="footer-column-title">socials</span>
+          <span class="footer-column-title" id="footer-socials">socials</span>
           <a href="https://sodax.com/news" class="footer-link">News</a>
-          <a href="https://discord.gg/xM2Nh4S6vN" class="footer-link" target="_blank">Discord <i data-lucide="arrow-up-right"></i></a>
-          <a href="https://x.com/gosodax" class="footer-link" target="_blank">X (Twitter) <i data-lucide="arrow-up-right"></i></a>
-          <a href="https://linktr.ee/go.sodax" class="footer-link" target="_blank">Linktree <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://discord.gg/xM2Nh4S6vN" class="footer-link" target="_blank" rel="noopener noreferrer">Discord <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="https://x.com/gosodax" class="footer-link" target="_blank" rel="noopener noreferrer">X (Twitter) <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="https://linktr.ee/go.sodax" class="footer-link" target="_blank" rel="noopener noreferrer">Linktree <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
         </div>
         <div class="footer-column">
-          <span class="footer-column-title">resources</span>
-          <a href="https://sodax-1.gitbook.io/sodax-docs/readme-1" class="footer-link" target="_blank">Documentation <i data-lucide="arrow-up-right"></i></a>
-          <a href="https://github.com/icon-project/sodax-frontend" class="footer-link" target="_blank">Github <i data-lucide="arrow-up-right"></i></a>
-          <a href="https://sodaxscan.com/" class="footer-link" target="_blank">SODAX Scan <i data-lucide="arrow-up-right"></i></a>
-          <a href="#" class="footer-link">Brand Kit <i data-lucide="arrow-down"></i></a>
+          <span class="footer-column-title" id="footer-resources">resources</span>
+          <a href="https://sodax-1.gitbook.io/sodax-docs/readme-1" class="footer-link" target="_blank" rel="noopener noreferrer">Documentation <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="https://github.com/icon-project/sodax-frontend" class="footer-link" target="_blank" rel="noopener noreferrer">Github <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="https://sodaxscan.com/" class="footer-link" target="_blank" rel="noopener noreferrer">SODAX Scan <i data-lucide="arrow-up-right" aria-hidden="true"></i><span class="visually-hidden">(opens in new tab)</span></a>
+          <a href="#" class="footer-link">Brand Kit <i data-lucide="arrow-down" aria-hidden="true"></i></a>
           <a href="#" class="footer-link">Terms</a>
         </div>
-      </div>
+      </nav>
     </div>
   </footer>
 
